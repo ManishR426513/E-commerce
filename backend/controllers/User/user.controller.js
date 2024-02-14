@@ -13,7 +13,7 @@ export const RegisterUser = async (req, res) => {
     const { fname, lname, email, password, phoneno, role, dob } = req.body;
 
     const checkEmail = await userModel.findOne({ email });
-    console.log("test",checkEmail)
+    console.log("test", checkEmail);
 
     if (checkEmail) {
       return ErrorResponse(res, "User already exists");
@@ -105,7 +105,6 @@ export const getAllusers = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    
     const id = req.params.id;
     const user = await userModel.findById(id);
 

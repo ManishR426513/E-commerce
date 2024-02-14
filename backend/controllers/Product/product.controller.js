@@ -106,6 +106,4 @@ export const DeleteProduct = async (req, res) => {
   }
 };
 
-export const SearchProduct = async (req, res) => {
-  
-};
+export const SearchProduct = async (req, res) => {};
