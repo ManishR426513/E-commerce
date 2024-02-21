@@ -2,7 +2,7 @@ import React from 'react'
 import SideBar from '../Common/SideBar'
 import TopBar from '../Common/TopBar'
 
-export default function PrivateLayout({ children, activeSubMenu }) {
+export default function PrivateUserLayout({ children, activeSubMenu }) {
   return (
     <div class="flex  h-full w-full">
       <SideBar />

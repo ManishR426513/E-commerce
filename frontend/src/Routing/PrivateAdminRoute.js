@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import PrivateLayout from "../Layout/PrivateLayout";
+import PrivateAdminLayout from "../Layout/PrivateAdminLayout";
 
-export default function PrivateRoute({ children }) {
+export default function PrivateAdminRoute({ children }) {
   //const accessToken = useSelector((state) => state.auth.accessToken);
   const {accessToken}=useSelector((state)=>state.auth)
 
@@ -11,5 +11,5 @@ export default function PrivateRoute({ children }) {
     return <Navigate to="/login" replace />;
   }
 
-  return <PrivateLayout children={children} />;
+  return <PrivateAdminLayout children={children} />;
 }
