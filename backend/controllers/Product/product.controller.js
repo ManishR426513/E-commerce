@@ -48,6 +48,8 @@ export const GetallCategory = async (req, res) => {
     return ErrorResponse(res, "Error searching for Category: " + error.message);
   }
 };
+
+
 export const GetSingleproductDetail = async (req, res) => {
   try {
     const id = req.params.id;
@@ -70,12 +72,15 @@ export const updateProduct = async (req, res) => {
 
     const { name, price, description, stock, category } = req.body;
 
+    console.log(name, price, description, stock, category)
+
     const product = await productModel.findByIdAndUpdate(
       id,
 
       { name, price, description, stock, category },
       { new: true }
     );
+
     if (!product) {
       return ErrorResponse(res, "Product Not Found");
     }

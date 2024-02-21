@@ -1,9 +1,12 @@
-import express from "express";
-import { AddtoWishlist, GetWishlistproducts } from "./wishlist.controller.js";
-import { CheckHeaderToken } from "../../helpers/authHelper.js";
-const app = express.Router();
+import express from "express"
+import { CheckHeaderToken } from "../../helpers/authHelper.js"
+import { AddtoWishlist, deleteWishlistProduct, getWishlistProducts } from "./wishlist.controller.js"
 
-app.post("/add-to-wishlist/:id", CheckHeaderToken, AddtoWishlist);
-app.get("/get-wishlist-products", CheckHeaderToken, GetWishlistproducts);
+const app=express.Router()
 
-export default app;
+
+app.post("/add-to-wishlist/:id",CheckHeaderToken,AddtoWishlist)
+app.get("/get-wishlist-products",CheckHeaderToken,getWishlistProducts)
+app.delete('/delete-wishlist-product/:id',CheckHeaderToken,deleteWishlistProduct)
+
+export default app
