@@ -1,6 +1,6 @@
 import {
   ErrorResponse,
-  successResponse,
+  successResponse, 
   successResponseWithData,
 } from "../../helpers/apiResponse.js";
 import productModel from "../../models/Product/product.model.js";
@@ -30,7 +30,7 @@ export const GetAllproduct = async (req, res) => {
   try {
     const allProducts = await productModel.find({}).sort({ createdAt: -1 });
 
-    return successResponse(res, allProducts);
+    return successResponseWithData(res,'Products List', allProducts);
   } catch (error) {
     console.log(error);
     return ErrorResponse(res, "Error searching for Products: " + error.message);

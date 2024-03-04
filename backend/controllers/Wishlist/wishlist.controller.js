@@ -56,7 +56,7 @@ export const getWishlistProducts = async (req, res) => {
     const Wishlistitems = await wishlistModel
       .find({ userid: userid })
       .populate("wishlist");
-    return successResponse(res, Wishlistitems);
+    return successResponseWithData(res,"Wishlist Products Fetch SucessFully", Wishlistitems);
   } catch (error) {
     console.log(error);
   }

@@ -44,6 +44,7 @@ export const allOrderslist = async (req, res) => {
     const orderList = await orderModel.find({ userid: userid });
 
     console.log("orderList", orderList);
+    console.log("orderList", orderList[0].items[0].productid.populate("items.products"));
   } catch (error) {
     console.log(error);
   }

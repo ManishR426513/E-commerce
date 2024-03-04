@@ -2,10 +2,12 @@ import mongoose, { Schema } from "mongoose";
 
 const orderSchema = new mongoose.Schema(
   {
-    items: { type: [Schema.Types.Mixed], ref: "products", required: true },
+    orderItems: [
+      { product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },quantity:Number },
+    ],
     totalAmount: { type: Number },
     totalItems: { type: Number },
-    userid: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     paymentMethod: {
       type: String,
 
