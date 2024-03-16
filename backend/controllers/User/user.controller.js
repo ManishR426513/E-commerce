@@ -56,7 +56,10 @@ export const LoginUser = async (req, res) => {
       lname: user.lname,
       phoneno: user.phoneno,
       email: user.email,
+      role:user.role
     };
+
+    console.log("additionalData",additionalData)
     const jwtPayload = { _id: user._id, ...additionalData };
 
     const token = jwt.sign(jwtPayload, process.env.JWT_SECRET, {
@@ -70,6 +73,7 @@ export const LoginUser = async (req, res) => {
         lname: user.lname,
         email: user.email,
         phoneno: user.phoneno,
+        role:user.role
       },
       token,
     });

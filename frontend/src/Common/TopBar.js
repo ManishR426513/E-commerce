@@ -3,6 +3,9 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../Redux/Reducers/authSlice";
+import { toast } from "react-toastify";
 
 const navigation = [
   { name: "Home" },
@@ -16,7 +19,7 @@ function classNames(...classes) {
 }
 const TopBar = () => {
   const navigate = useNavigate();
-
+  const dispatch=useDispatch()
   const handleNavigate = (data) => {
     if (data == "Home") {
       navigate("/");
@@ -28,6 +31,11 @@ const TopBar = () => {
       navigate("/catgeory");
     }
   };
+
+  const handleLogout=()=>{
+    dispatch(logout())
+    toast.success('Logout Successfully')
+  }
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -134,10 +142,11 @@ const TopBar = () => {
                           </a>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
+                      <Menu.Item  >
                         {({ active }) => (
                           <a
-                            href="#"
+                             onClick={()=>handleLogout()}
+                           // href="#"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"

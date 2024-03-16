@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
     },
     dob:{
       type:Date,
-      required:true
+   //     required:true
     },
     role: {
       type: String,
@@ -33,11 +33,9 @@ const userSchema = new mongoose.Schema(
 
     phoneno: {
       type: Number,
-      required: true,
+   //   required: true,
     },
-    role:{
-
-    }
+    
   },
   { timestamps: true }
 );

@@ -48,7 +48,7 @@ const Login = (props) => {
         setLoading(false);
         const resData = response.data;
         if (resData.status == 1) {
-          console.log(resData)
+         
           
           toast.success(resData?.message);
           dispatch(setuser(resData?.data?.user));
