@@ -8,6 +8,9 @@ import wishlistModel from "../../models/Wishlist/wishlist.model.js";
 export const AddtoWishlist = async (req, res) => {
   const userid = req.userid;
   const wishlistId = req.params.id;
+  
+
+  console.log("wishlistId",wishlistId)
 
   try {
     const wishlistItems = await wishlistModel.find({ userid: userid });
@@ -56,7 +59,11 @@ export const getWishlistProducts = async (req, res) => {
     const Wishlistitems = await wishlistModel
       .find({ userid: userid })
       .populate("wishlist");
-    return successResponseWithData(res,"Wishlist Products Fetch SucessFully", Wishlistitems);
+    return successResponseWithData(
+      res,
+      "Wishlist Products Fetch SucessFully",
+      Wishlistitems
+    );
   } catch (error) {
     console.log(error);
   }

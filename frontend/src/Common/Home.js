@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ShoppingCartIcon, StarIcon } from "@heroicons/react/24/outline";
 import { authAxios } from "../config/config";
+import { CiHeart } from "react-icons/ci";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const [products, setproducts] = useState([]);
@@ -18,15 +20,34 @@ const Home = () => {
       });
   };
 
-  const addTocart=async(item)=>{
+  const addTocart = async (id) => {
+    console.log("sds", id);
+    await authAxios()
+      .post(`/cart/add-to-cart/${id}`)
+      .then((response) => {
+        console.log(response)
+        fetchAllproducts();
 
-    
+        toast.success(response.data.message);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
+  };
 
-  }
-
-  const addTowishlist=()=>{
-    
-  }
+  const addTowishlist = async (id) => {
+    await authAxios()
+      .post(`/wishlist/add-to-wishlist/${id}`)
+      .then((response) => {
+        console.log("sdsd");
+        fetchAllproducts();
+        console.log("sds", response.data.message);
+        toast.success(response.data.message);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
+  };
 
   useEffect(() => {
     fetchAllproducts();
@@ -44,6 +65,8 @@ const Home = () => {
             <div class="w-full md:w-1/2 lg:w-1/4 pl-5 pr-5 mb-5 lg:pl-2 lg:pr-2">
               <div class="bg-white rounded-lg m-h-64 p-2 transform hover:translate-y-2 hover:shadow-xl transition duration-300">
                 <figure class="mb-2">
+                  <CiHeart onClick={() => addTowishlist(item._id)} />
+
                   <img
                     //  src={item.images[0] || item.images[1]}
                     alt=""
@@ -74,11 +97,9 @@ const Home = () => {
                     <button
                       href="javascript:;"
                       class="rounded-full bg-gray-800 text-white hover:bg-white hover:text-purple-900 hover:shadow-xl focus:outline-none w-10 h-10 flex ml-auto transition duration-300"
-                      // onClick={()=>handlecart(item)}
+                      onClick={() => addTocart(item._id)}
                     >
                       <ShoppingCartIcon
-                         
-                        
                         width="24"
                         height="24"
                         className="ml-2 mt-2"

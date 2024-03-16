@@ -9,8 +9,12 @@ export const AddtoCart = async (req, res) => {
   const userid = req.userid;
   const productid = req.params.id;
 
+  console.log("productid", productid);
+
   try {
     const cartItems = await cartModel.find({ userid: userid });
+
+    // console.log("cartIems",cartItems)
 
     if (cartItems.length === 0) {
       const cartproduct = await new cartModel({
@@ -74,7 +78,7 @@ export const getCartproducts = async (req, res) => {
     const cartItems = await cartModel
       .find({ userid: userid })
       .populate("product");
-    return successResponse(res, cartItems);
+    return successResponseWithData(res, "All carts Products", cartItems);
   } catch (error) {
     console.log(error);
   }
@@ -90,7 +94,7 @@ export const DeletefromCart = async (req, res) => {
       return ErrorResponse(res, "Product not found");
     }
 
-    return successResponse(res, deleteCartItems);
+    return successResponse(res, "Product removed from cart Sucessfully");
   } catch (error) {
     console.log(error);
   }
@@ -119,7 +123,7 @@ export const decreaseProductquantity = async (req, res) => {
         return successResponse(res, deleteCartItems);
       } else {
         const decreaseQuantity = cartItems[0].quantity - 1;
-        console.log(decreaseQuantity)
+        console.log(decreaseQuantity);
 
         const updateCartItem = await cartModel.findByIdAndUpdate(
           cartItems[0]._id,
@@ -138,3 +142,4 @@ export const decreaseProductquantity = async (req, res) => {
     console.log(error);
   }
 };
+
