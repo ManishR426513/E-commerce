@@ -5,7 +5,7 @@ import ProductModel from "./Product/ProductModel";
 const AdminProducts = () => {
   const [products, setproducts] = useState([]);
   const [showProductModel, setshowProductModel] = useState(false);
-
+  const [productDetail, setproductDetail] = useState([]);
   const fetchAllproducts = async () => {
     await authAxios()
       .get("/product/get-all-products")
@@ -19,12 +19,26 @@ const AdminProducts = () => {
       });
   };
 
+  const addProduct = () => {
+    setshowProductModel(true);
+    if (showProductModel == true) {
+      console.log("reached");
+    }
+  };
+
+
+
+
   useEffect(() => {
     fetchAllproducts();
   }, []);
 
   return (
     <div>
+      <button className="btn" onClick={() => addProduct()}>
+        Add Product
+      </button>
+
       <div class="grid gap-x-8 gap-y-4 grid-cols-3">
         {products &&
           products.map((item) => (
@@ -51,8 +65,13 @@ const AdminProducts = () => {
             </>
           ))}
       </div>
-
-      {showProductModel && <ProductModel />}
+      {showProductModel && (
+        <ProductModel
+        setproductDetail={setproductDetail}
+          productDetail={productDetail}
+          setshowProductModel={setshowProductModel}
+        />
+      )}
     </div>
   );
 };

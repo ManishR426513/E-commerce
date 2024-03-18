@@ -7,9 +7,18 @@ import productModel from "../../models/Product/product.model.js";
 
 export const Createproduct = async (req, res) => {
   try {
-    const { name, description, price, stock, category } = req.body;
+    const { name, description, price, stock, category,photos } = req.body;
 
-    const checkDuplicateName = await productModel.findOne({ name });
+   console.log(photos)
+
+
+   const uploadedImages = req.files ? req.files.map((file) => file.path) : [];
+   console.log(uploadedImages)
+
+   // console.log(name, description, price, stock, category,photos)
+
+   // const checkDuplicateName = await productModel.findOne({ name });
+    /*
 
     if (checkDuplicateName) {
       return ErrorResponse(res, "Product with same name  already exists");
@@ -23,6 +32,7 @@ export const Createproduct = async (req, res) => {
       category,
     }).save();
     return successResponseWithData(res, "Product Created Sucessfully", product);
+    */
   } catch (error) {}
 };
 
