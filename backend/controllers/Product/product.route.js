@@ -1,13 +1,13 @@
 import express from "express"
 import { Createproduct, DeleteProduct, GetAllproduct, GetSingleproductDetail, GetallCategory, updateProduct } from "./product.controller.js"
-import { upload } from "../../middlewares/multer.js"
+import { upload, uploadFile } from "../../middlewares/multer.js"
 const app=express.Router()
 
 
   
   
 
-app.post("/create-product",upload.single("photo"),Createproduct)
+app.post("/create-product",upload.array("photos",4),Createproduct)
 app.get("/get-all-products",GetAllproduct)
 app.get('/get-all-category',GetallCategory)
 app.get('/:id',GetSingleproductDetail)

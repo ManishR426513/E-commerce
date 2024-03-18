@@ -1,12 +1,11 @@
 import multer from "multer";
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./public/image");
+    cb(null, "public/images");
   },
   filename: (req, file, cb) => {
-    const fileName = `${Date.now()}${path.extname(file.originalname)}`;
-    cb(null, fileName);
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `${file.fieldname}-${Date.now()}.${ext}`);
   },
 });
 
@@ -19,8 +18,10 @@ const multerFilter = (req, file, cb) => {
 };
 
 export const upload = multer({
- storage
+storage:storage
   //fileFilter: multerFilter,
 });
+
+export const uploadFile=multer({dest:"public/images"})
 
 //const upload = multer({ storage })

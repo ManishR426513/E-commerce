@@ -1,24 +1,21 @@
 import {
   ErrorResponse,
-  successResponse, 
+  successResponse,
   successResponseWithData,
 } from "../../helpers/apiResponse.js";
 import productModel from "../../models/Product/product.model.js";
 
 export const Createproduct = async (req, res) => {
   try {
-    const { name, description, price, stock, category,photos } = req.body;
+    const { name, description, price, stock, category } = req.body;
 
-   console.log(photos)
+    // console.log(req.body)
+    //  console.log(req.files)
 
+    const uploadedImages = req.files ? req.files.map((file) => file.path) : [];
+    // console.log(uploadedImages)
 
-   const uploadedImages = req.files ? req.files.map((file) => file.path) : [];
-   console.log(uploadedImages)
-
-   // console.log(name, description, price, stock, category,photos)
-
-   // const checkDuplicateName = await productModel.findOne({ name });
-    /*
+    const checkDuplicateName = await productModel.findOne({ name });
 
     if (checkDuplicateName) {
       return ErrorResponse(res, "Product with same name  already exists");
@@ -30,9 +27,9 @@ export const Createproduct = async (req, res) => {
       price,
       stock,
       category,
+      photos: uploadedImages,
     }).save();
     return successResponseWithData(res, "Product Created Sucessfully", product);
-    */
   } catch (error) {}
 };
 
@@ -40,7 +37,7 @@ export const GetAllproduct = async (req, res) => {
   try {
     const allProducts = await productModel.find({}).sort({ createdAt: -1 });
 
-    return successResponseWithData(res,'Products List', allProducts);
+    return successResponseWithData(res, "Products List", allProducts);
   } catch (error) {
     console.log(error);
     return ErrorResponse(res, "Error searching for Products: " + error.message);
@@ -58,7 +55,6 @@ export const GetallCategory = async (req, res) => {
     return ErrorResponse(res, "Error searching for Category: " + error.message);
   }
 };
-
 
 export const GetSingleproductDetail = async (req, res) => {
   try {
@@ -82,7 +78,7 @@ export const updateProduct = async (req, res) => {
 
     const { name, price, description, stock, category } = req.body;
 
-    console.log(name, price, description, stock, category)
+    console.log(name, price, description, stock, category);
 
     const product = await productModel.findByIdAndUpdate(
       id,

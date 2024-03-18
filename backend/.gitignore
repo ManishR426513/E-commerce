@@ -17,6 +17,7 @@ build/
 
 # Dependencies installed via npm
 /node_modules
+/public
 
 # Output of npm pack
 /*.tgz

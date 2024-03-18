@@ -4,6 +4,7 @@ import { ConnectDB } from "./config/index.js";
 import allRoutes from "./routes/index.js";
 import cors from "cors";
 import bodyParser from "body-parser";
+import multer from "multer";
 dotenv.config();
 
 ConnectDB();
@@ -16,8 +17,9 @@ app.use(
     },
   })
 );
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(express.urlencoded({ extended: false, limit: 1000 }));
 app.use(cors("*"));
 
 app.use("/api", allRoutes);
