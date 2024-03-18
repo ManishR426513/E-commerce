@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { authAxios } from "../../config/config";
 import ProductModel from "./Product/ProductModel";
+import { toast } from "react-toastify";
 
 const AdminProducts = () => {
   const [products, setproducts] = useState([]);
@@ -19,15 +20,35 @@ const AdminProducts = () => {
       });
   };
 
-  const addProduct = () => {
+  const addProduct = async (data) => {
+    console.log("d", data);
     setshowProductModel(true);
     if (showProductModel == true) {
-      console.log("reached");
+      const formData = new FormData();
+      data?.photos?.forEach((file) => {
+        formData.append("photos", file);
+      });
+    
+      formData.append("name", data.name);
+      formData.append("category", data.category);
+      formData.append("description", data.description);
+      formData.append("price", data.price);
+      formData.append("stock", data.stock);
+
+      await authAxios()
+        .post(`/product/create-product`, formData)
+        .then((response) => {
+          const resData = response.data;
+          toast.success(resData.message);
+          fetchAllproducts();
+          //setproductDetail([])
+          setshowProductModel(false);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
     }
   };
-
-
-
 
   useEffect(() => {
     fetchAllproducts();
@@ -61,13 +82,18 @@ const AdminProducts = () => {
                     <div className="badge badge-outline">{item.rating}</div>
                   </div>
                 </div>
+               
+               <button >Edit Product</button>
+               <button>Delete </button>
+
               </div>
             </>
           ))}
       </div>
       {showProductModel && (
         <ProductModel
-        setproductDetail={setproductDetail}
+          addProduct={addProduct}
+          setproductDetail={setproductDetail}
           productDetail={productDetail}
           setshowProductModel={setshowProductModel}
         />
