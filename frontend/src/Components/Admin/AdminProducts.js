@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { authAxios } from "../../config/config";
 import ProductModel from "./Product/ProductModel";
 import { toast } from "react-toastify";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const AdminProducts = () => {
   const [products, setproducts] = useState([]);
@@ -28,7 +29,7 @@ const AdminProducts = () => {
       data?.photos?.forEach((file) => {
         formData.append("photos", file);
       });
-    
+
       formData.append("name", data.name);
       formData.append("category", data.category);
       formData.append("description", data.description);
@@ -54,6 +55,8 @@ const AdminProducts = () => {
     fetchAllproducts();
   }, []);
 
+  console.log(products)
+
   return (
     <div>
       <button className="btn" onClick={() => addProduct()}>
@@ -67,25 +70,21 @@ const AdminProducts = () => {
               <div className="card w-96 bg-base-100 shadow-xl">
                 <figure>
                   <img
-                    src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                    src={`${process.env.REACT_APP_BASEURL}/${item.photos[0]}`}
                     alt="Shoes"
                   />
                 </figure>
                 <div className="card-body">
-                  <h2 className="card-title text-center">
-                    {item.name}
-                    {/* <div className="badge badge-secondary">NEW</div> */}
+                  <h2 className="card-title">
+                    Shoes!
+                    <div className="badge badge-secondary">NEW</div>
                   </h2>
-                  <p>{item.description} </p>
+                  <p>If a dog chews shoes whose shoes does he choose?</p>
                   <div className="card-actions justify-end">
-                    <div className="badge badge-outline">{item.price}</div>
-                    <div className="badge badge-outline">{item.rating}</div>
+                    <div className="badge badge-outline">Fashion</div>
+                    <div className="badge badge-outline">Products</div>
                   </div>
                 </div>
-               
-               <button >Edit Product</button>
-               <button>Delete </button>
-
               </div>
             </>
           ))}

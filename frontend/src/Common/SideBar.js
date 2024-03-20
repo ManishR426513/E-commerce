@@ -33,10 +33,10 @@ const Sidebar = ({ activeToggleSidebar, handleToggleDeactive }) => {
             </li>
           </Link>
 
-          <li className="px-3 py-2 flex gap-[5px] items-center transition-colors duration-200 relative hover:text-gray-50 text-gray-100">
+          <Link  to="/users"className="px-3 py-2 flex gap-[5px] items-center transition-colors duration-200 relative hover:text-gray-50 text-gray-100">
             <FaUserAlt />
             Users
-          </li>
+          </Link>
         </ul>
       </aside>
     </>

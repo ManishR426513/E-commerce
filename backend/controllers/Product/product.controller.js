@@ -36,6 +36,7 @@ export const Createproduct = async (req, res) => {
 export const GetAllproduct = async (req, res) => {
   try {
     const allProducts = await productModel.find({}).sort({ createdAt: -1 });
+    console.log("asa",allProducts)
 
     return successResponseWithData(res, "Products List", allProducts);
   } catch (error) {

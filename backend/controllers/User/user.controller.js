@@ -86,7 +86,7 @@ export const getAllusers = async (req, res) => {
   try {
     const allUsers = await userModel.find({ role: "USER" });
     if (allUsers.length == 0) {
-      return successResponse(res, "No Users Found ");
+      return successResponse(res, "No Users Found");
     }
 
     const userDeatils = allUsers.map((item) => {
@@ -100,7 +100,7 @@ export const getAllusers = async (req, res) => {
         },
       };
     });
-    return successResponse(res, userDeatils);
+    return successResponseWithData(res,"Users Fetch SucessFully", userDeatils);
   } catch (error) {
     console.log(error);
     return ErrorResponse(res, "Error searching for Users: " + error.message);
@@ -122,3 +122,14 @@ export const getUser = async (req, res) => {
     console.log(error);
   }
 };
+
+export const updateProfilePic=async(req, res)=>{
+  console.log("req.files",req.files)
+ // const uploadedImages = req.files ? req.files.map((file) => file.path) : [];
+ console.log("req",req.file.path)
+
+ const uploadedImage=req.file.path
+
+ 
+ // console.log("uploadedImages",uploadedImages)
+}

@@ -10,6 +10,7 @@ import Cart from "../Components/User/Cart/Cart";
 import { useSelector } from "react-redux";
 import AdminHome from "../Components/Admin/AdminHome";
 import AdminProducts from "../Components/Admin/AdminProducts";
+import Users from "../Components/Admin/Users/Users";
 
 export const Routing = () => {
   const userType = useSelector((state) => state.auth.user.role);
@@ -46,6 +47,15 @@ export const Routing = () => {
           element={
             <PrivateAdminRoute>
               <AdminProducts />
+            </PrivateAdminRoute>
+          }
+        />
+
+        <Route
+          path="/users"
+          element={
+            <PrivateAdminRoute>
+              <Users />
             </PrivateAdminRoute>
           }
         />
