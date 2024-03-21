@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { authAxios } from "../../../config/config";
 
-const Users = () => {
-  const [allUsers, setallUsers] = useState([]);
+const AdminOrders = () => {
+  const [orders, setorders] = useState([]);
 
-  const fetchAllusers = async () => {
+  const fetchorders = async () => {
     await authAxios()
-      .get(`/auth/get-all-users`)
+      .get(`/order/get-all-orders`)
       .then((response) => {
+        console.log(response)
         const resData = response.data;
         if (resData.status == 1) {
-          setallUsers(resData.data);
+          console.log("resData",resData)
+         // setorders(resData.data);
         } else {
         }
       })
@@ -19,10 +21,10 @@ const Users = () => {
       });
   };
 
-  console.log(allUsers)
+  console.log(orders)
 
   useEffect(() => {
-    fetchAllusers();
+    fetchorders();
   }, []);
   return (
     <div className="container mx-auto px-4 sm:px-8">
@@ -51,8 +53,8 @@ const Users = () => {
                 </tr>
               </thead>
               <tbody>
-                {allUsers &&
-                  allUsers.map((item) => (
+                {orders &&
+                  orders.map((item) => (
                     <>
                       <tr>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -125,4 +127,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default AdminOrders;

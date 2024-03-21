@@ -3,6 +3,7 @@ import { MdDashboard } from "react-icons/md";
 import { FaFileInvoiceDollar } from "react-icons/fa6";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { RxBorderSplit } from "react-icons/rx";
 
 const Sidebar = ({ activeToggleSidebar, handleToggleDeactive }) => {
   return (
@@ -36,6 +37,11 @@ const Sidebar = ({ activeToggleSidebar, handleToggleDeactive }) => {
           <Link  to="/users"className="px-3 py-2 flex gap-[5px] items-center transition-colors duration-200 relative hover:text-gray-50 text-gray-100">
             <FaUserAlt />
             Users
+          </Link>
+
+          <Link  to="/orders"className="px-3 py-2 flex gap-[5px] items-center transition-colors duration-200 relative hover:text-gray-50 text-gray-100">
+            <RxBorderSplit />
+            Orders
           </Link>
         </ul>
       </aside>
