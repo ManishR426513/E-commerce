@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: false, limit: 1000 }));
 app.use(cors("*"));
 
 app.use("/api", allRoutes);
+app.use('/public', express.static("public"));
 
 app.listen(process.env.PORT, () => {
   console.log(`app is Listen on ${process.env.PORT}`);

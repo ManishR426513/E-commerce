@@ -1,7 +1,7 @@
 import multer from "multer";
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/images");
+    cb(null, "public");
   },
   filename: (req, file, cb) => {
     const ext = file.mimetype.split("/")[1];
@@ -22,6 +22,5 @@ storage:storage
   //fileFilter: multerFilter,
 });
 
-export const uploadFile=multer({dest:"public/images"})
 
 //const upload = multer({ storage })

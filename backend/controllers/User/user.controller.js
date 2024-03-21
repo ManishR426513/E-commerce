@@ -27,6 +27,7 @@ export const RegisterUser = async (req, res) => {
       email,
       password: hashedPassword,
       phoneno,
+      profilePic:"",
       role,
       dob,
     }).save();
@@ -126,9 +127,17 @@ export const getUser = async (req, res) => {
 export const updateProfilePic=async(req, res)=>{
   console.log("req.files",req.files)
  // const uploadedImages = req.files ? req.files.map((file) => file.path) : [];
- console.log("req",req.file.path)
+// console.log("req",req.file.path)
 
  const uploadedImage=req.file.path
+
+ const userid = req.userid;
+
+
+ console.log("userid",userid)
+ console.log("upload",uploadedImage)
+
+
 
  
  // console.log("uploadedImages",uploadedImages)
