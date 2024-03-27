@@ -1,37 +1,62 @@
 import { successResponseWithData } from "../../helpers/apiResponse.js";
 import orderModel from "../../models/Order/order.model.js";
 
+/*
+export const createOrder=async()=>{
+
+}
+*/
+
+export const allOrderslist = async (req, res) => {
+  try {
+    const userid = req.userid;
+
+    console.log("userid", userid);
+
+    const userorders = await orderModel.findOne({ userid: userid })
+    .populate("products.product")
+    //.populate("orderby")
+    //.exec();
+    //  .populate("orderby")
+     
+    console.log("orderList", userorders);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const adminOrdersList = () => {};
+
 export const createOrder = async (req, res) => {
   try {
     const {
-      orderItems,
+      products,
       totalAmount,
-      totalItems,
+
       userid,
       paymentMethod,
       paymentStatus,
-      status,
+      orderStatus,
       selectedAddress,
     } = req.body;
 
     console.log(
-      orderItems,
+      products,
       totalAmount,
-      totalItems,
+
       userid,
       paymentMethod,
       paymentStatus,
-      status,
+      orderStatus,
       selectedAddress
     );
     const createOrder = await new orderModel({
-      orderItems,
+      products,
       totalAmount,
-      totalItems,
       userid,
       paymentMethod,
       paymentStatus,
-      status,
+      orderStatus,
       selectedAddress,
     }).save();
 
@@ -44,7 +69,7 @@ export const createOrder = async (req, res) => {
     console.log(error);
   }
 };
-
+/*
 export const allOrderslist = async (req, res) => {
   try {
     const userid = req.userid;
@@ -75,7 +100,7 @@ export const adminOrdersList = async (req, res) => {
     //  console.log("allOrderslist",allOrderslist[0].orderItems.populate("orderItems") );
 
     // allOrderslist.orderItems.pos
-    /*
+  
     const orderList = allOrderslist.map((item) => {
       return {
         id: item._id,
@@ -92,8 +117,9 @@ export const adminOrdersList = async (req, res) => {
       "Orders Fetched SucessFully",
       allOrderslist
     );
-    */
+   
   } catch (error) {
     console.log(error);
   }
 };
+*/
